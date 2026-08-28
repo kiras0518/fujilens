@@ -1,0 +1,1020 @@
+{
+  "featureDefinitions": {
+    "R": {
+      "name": "Aperture Ring",
+      "nameZh": "光圈環"
+    },
+    "WR": {
+      "name": "Weather Resistant",
+      "nameZh": "全天候"
+    },
+    "OIS": {
+      "name": "Optical Image Stabilization",
+      "nameZh": "光學防手震"
+    },
+    "LM": {
+      "name": "Linear Motor",
+      "nameZh": "線性對焦馬達"
+    },
+    "APD": {
+      "name": "Apodization Filter",
+      "nameZh": "變跡濾鏡"
+    },
+    "Macro": {
+      "name": "Macro",
+      "nameZh": "微距"
+    },
+    "PZ": {
+      "name": "Power Zoom",
+      "nameZh": "電動變焦"
+    }
+  },
+  "lenses": [
+    {
+      "id": "xf14-f28-r",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF14mm F2.8 R",
+      "focalLength": {
+        "min": 14,
+        "max": 14
+      },
+      "aperture": {
+        "maxWide": 2.8,
+        "maxTele": 2.8
+      },
+      "opticalConstruction": {
+        "groups": 7,
+        "elements": 10
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.12,
+      "filterSize": 58,
+      "weight": 235,
+      "features": [
+        "R"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf16-f14-r-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF16mm F1.4 R WR",
+      "focalLength": {
+        "min": 16,
+        "max": 16
+      },
+      "aperture": {
+        "maxWide": 1.4,
+        "maxTele": 1.4
+      },
+      "opticalConstruction": {
+        "groups": 11,
+        "elements": 13
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.21,
+      "filterSize": 67,
+      "weight": 375,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf18-f2-r",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF18mm F2 R",
+      "focalLength": {
+        "min": 18,
+        "max": 18
+      },
+      "aperture": {
+        "maxWide": 2.0,
+        "maxTele": 2.0
+      },
+      "opticalConstruction": {
+        "groups": 7,
+        "elements": 8
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.14,
+      "filterSize": 52,
+      "weight": 116,
+      "features": [
+        "R"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf23-f14-r",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF23mm F1.4 R",
+      "focalLength": {
+        "min": 23,
+        "max": 23
+      },
+      "aperture": {
+        "maxWide": 1.4,
+        "maxTele": 1.4
+      },
+      "opticalConstruction": {
+        "groups": 8,
+        "elements": 11
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.1,
+      "filterSize": 62,
+      "weight": 300,
+      "features": [
+        "R"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf23-f2-r-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF23mm F2 R WR",
+      "focalLength": {
+        "min": 23,
+        "max": 23
+      },
+      "aperture": {
+        "maxWide": 2.0,
+        "maxTele": 2.0
+      },
+      "opticalConstruction": {
+        "groups": 6,
+        "elements": 10
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.13,
+      "filterSize": 43,
+      "weight": 180,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf27-f28",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF27mm F2.8",
+      "focalLength": {
+        "min": 27,
+        "max": 27
+      },
+      "aperture": {
+        "maxWide": 2.8,
+        "maxTele": 2.8
+      },
+      "opticalConstruction": {
+        "groups": 5,
+        "elements": 7
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.1,
+      "filterSize": 39,
+      "weight": 78,
+      "features": [],
+      "generation": 1
+    },
+    {
+      "id": "xf35-f14-r",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF35mm F1.4 R",
+      "focalLength": {
+        "min": 35,
+        "max": 35
+      },
+      "aperture": {
+        "maxWide": 1.4,
+        "maxTele": 1.4
+      },
+      "opticalConstruction": {
+        "groups": 6,
+        "elements": 8
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.17,
+      "filterSize": 52,
+      "weight": 187,
+      "features": [
+        "R"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf35-f2-r-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF35mm F2 R WR",
+      "focalLength": {
+        "min": 35,
+        "max": 35
+      },
+      "aperture": {
+        "maxWide": 2.0,
+        "maxTele": 2.0
+      },
+      "opticalConstruction": {
+        "groups": 6,
+        "elements": 9
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.135,
+      "filterSize": 43,
+      "weight": 170,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf50-f2-r-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF50mm F2 R WR",
+      "focalLength": {
+        "min": 50,
+        "max": 50
+      },
+      "aperture": {
+        "maxWide": 2.0,
+        "maxTele": 2.0
+      },
+      "opticalConstruction": {
+        "groups": 7,
+        "elements": 9
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.15,
+      "filterSize": 46,
+      "weight": 200,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf56-f12-r",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF56mm F1.2 R",
+      "focalLength": {
+        "min": 56,
+        "max": 56
+      },
+      "aperture": {
+        "maxWide": 1.2,
+        "maxTele": 1.2
+      },
+      "opticalConstruction": {
+        "groups": 8,
+        "elements": 11
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.09,
+      "filterSize": 62,
+      "weight": 405,
+      "features": [
+        "R"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf56-f12-r-apd",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF56mm F1.2 R APD",
+      "focalLength": {
+        "min": 56,
+        "max": 56
+      },
+      "aperture": {
+        "maxWide": 1.2,
+        "maxTele": 1.2
+      },
+      "opticalConstruction": {
+        "groups": 8,
+        "elements": 11
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.09,
+      "filterSize": 62,
+      "weight": 405,
+      "features": [
+        "R",
+        "APD"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf60-f24-r-macro",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF60mm F2.4 R Macro",
+      "focalLength": {
+        "min": 60,
+        "max": 60
+      },
+      "aperture": {
+        "maxWide": 2.4,
+        "maxTele": 2.4
+      },
+      "opticalConstruction": {
+        "groups": 8,
+        "elements": 10
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.5,
+      "filterSize": 39,
+      "weight": 215,
+      "features": [
+        "R",
+        "Macro"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf80-f28-ois-wr-macro",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF80mm F2.8 OIS WR Macro",
+      "focalLength": {
+        "min": 80,
+        "max": 80
+      },
+      "aperture": {
+        "maxWide": 2.8,
+        "maxTele": 2.8
+      },
+      "opticalConstruction": {
+        "groups": 12,
+        "elements": 16
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 1.0,
+      "filterSize": 62,
+      "weight": 750,
+      "features": [
+        "OIS",
+        "WR",
+        "Macro"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf90-f2-r-lm-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF90mm F2 R LM WR",
+      "focalLength": {
+        "min": 90,
+        "max": 90
+      },
+      "aperture": {
+        "maxWide": 2.0,
+        "maxTele": 2.0
+      },
+      "opticalConstruction": {
+        "groups": 8,
+        "elements": 11
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.2,
+      "filterSize": 62,
+      "weight": 540,
+      "features": [
+        "R",
+        "LM",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf200-f2-r-lm-ois-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "prime",
+      "name": "XF200mm F2 R LM OIS WR",
+      "focalLength": {
+        "min": 200,
+        "max": 200
+      },
+      "aperture": {
+        "maxWide": 2.0,
+        "maxTele": 2.0
+      },
+      "opticalConstruction": {
+        "groups": 14,
+        "elements": 19
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.12,
+      "filterSize": 105,
+      "weight": 2265,
+      "features": [
+        "R",
+        "LM",
+        "OIS",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf8-16-f28-r-lm-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XF8-16mm F2.8 R LM WR",
+      "focalLength": {
+        "min": 8,
+        "max": 16
+      },
+      "aperture": {
+        "maxWide": 2.8,
+        "maxTele": 2.8
+      },
+      "opticalConstruction": {
+        "groups": 13,
+        "elements": 20
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.1,
+      "filterSize": null,
+      "weight": 805,
+      "features": [
+        "R",
+        "LM",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf10-24-f4-r-ois",
+      "series": "XF",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XF10-24mm F4 R OIS",
+      "focalLength": {
+        "min": 10,
+        "max": 24
+      },
+      "aperture": {
+        "maxWide": 4.0,
+        "maxTele": 4.0
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 14
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.16,
+      "filterSize": 72,
+      "weight": 410,
+      "features": [
+        "R",
+        "OIS"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf16-55-f28-r-lm-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XF16-55mm F2.8 R LM WR",
+      "focalLength": {
+        "min": 16,
+        "max": 55
+      },
+      "aperture": {
+        "maxWide": 2.8,
+        "maxTele": 2.8
+      },
+      "opticalConstruction": {
+        "groups": 12,
+        "elements": 17
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.16,
+      "filterSize": 77,
+      "weight": 655,
+      "features": [
+        "R",
+        "LM",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf18-55-f28-4-r-lm-ois",
+      "series": "XF",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XF18-55mm F2.8-4 R LM OIS",
+      "focalLength": {
+        "min": 18,
+        "max": 55
+      },
+      "aperture": {
+        "maxWide": 2.8,
+        "maxTele": 4.0
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 14
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.15,
+      "filterSize": 58,
+      "weight": 310,
+      "features": [
+        "R",
+        "LM",
+        "OIS"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf18-135-f35-56-ois-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XF18-135mm F3.5-5.6 OIS WR",
+      "focalLength": {
+        "min": 18,
+        "max": 135
+      },
+      "aperture": {
+        "maxWide": 3.5,
+        "maxTele": 5.6
+      },
+      "opticalConstruction": {
+        "groups": 12,
+        "elements": 16
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.27,
+      "filterSize": 67,
+      "weight": 490,
+      "features": [
+        "OIS",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf50-140-f28-r-lm-ois-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XF50-140mm F2.8 R LM OIS WR",
+      "focalLength": {
+        "min": 50,
+        "max": 140
+      },
+      "aperture": {
+        "maxWide": 2.8,
+        "maxTele": 2.8
+      },
+      "opticalConstruction": {
+        "groups": 16,
+        "elements": 23
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.12,
+      "filterSize": 72,
+      "weight": 995,
+      "features": [
+        "R",
+        "LM",
+        "OIS",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf55-200-f35-48-r-lm-ois",
+      "series": "XF",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XF55-200mm F3.5-4.8 R LM OIS",
+      "focalLength": {
+        "min": 55,
+        "max": 200
+      },
+      "aperture": {
+        "maxWide": 3.5,
+        "maxTele": 4.8
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 14
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.18,
+      "filterSize": 62,
+      "weight": 580,
+      "features": [
+        "R",
+        "LM",
+        "OIS"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xf100-400-f45-56-ois-wr",
+      "series": "XF",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XF100-400mm F4.5-5.6 OIS WR",
+      "focalLength": {
+        "min": 100,
+        "max": 400
+      },
+      "aperture": {
+        "maxWide": 4.5,
+        "maxTele": 5.6
+      },
+      "opticalConstruction": {
+        "groups": 14,
+        "elements": 21
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.19,
+      "filterSize": 77,
+      "weight": 1375,
+      "features": [
+        "OIS",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xc15-45-f35-56-ois-pz",
+      "series": "XC",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XC15-45mm F3.5-5.6 OIS PZ",
+      "focalLength": {
+        "min": 15,
+        "max": 45
+      },
+      "aperture": {
+        "maxWide": 3.5,
+        "maxTele": 5.6
+      },
+      "opticalConstruction": {
+        "groups": 9,
+        "elements": 10
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.24,
+      "filterSize": 52,
+      "weight": 135,
+      "features": [
+        "OIS",
+        "PZ"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xc16-50-f35-56-ois",
+      "series": "XC",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XC16-50mm F3.5-5.6 OIS",
+      "focalLength": {
+        "min": 16,
+        "max": 50
+      },
+      "aperture": {
+        "maxWide": 3.5,
+        "maxTele": 5.6
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 12
+      },
+      "apertureBlades": 7,
+      "maxMagnification": null,
+      "filterSize": 58,
+      "weight": 195,
+      "features": [
+        "OIS"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xc16-50-f35-56-ois-ii",
+      "series": "XC",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XC16-50mm F3.5-5.6 OIS II",
+      "focalLength": {
+        "min": 16,
+        "max": 50
+      },
+      "aperture": {
+        "maxWide": 3.5,
+        "maxTele": 5.6
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 12
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.2,
+      "filterSize": 58,
+      "weight": 195,
+      "features": [
+        "OIS"
+      ],
+      "generation": 2
+    },
+    {
+      "id": "xc50-230-f45-67-ois",
+      "series": "XC",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XC50-230mm F4.5-6.7 OIS",
+      "focalLength": {
+        "min": 50,
+        "max": 230
+      },
+      "aperture": {
+        "maxWide": 4.5,
+        "maxTele": 6.7
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 13
+      },
+      "apertureBlades": 7,
+      "maxMagnification": null,
+      "filterSize": 58,
+      "weight": 375,
+      "features": [
+        "OIS"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "xc50-230-f45-67-ois-ii",
+      "series": "XC",
+      "mount": "X",
+      "type": "zoom",
+      "name": "XC50-230mm F4.5-6.7 OIS II",
+      "focalLength": {
+        "min": 50,
+        "max": 230
+      },
+      "aperture": {
+        "maxWide": 4.5,
+        "maxTele": 6.7
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 13
+      },
+      "apertureBlades": 7,
+      "maxMagnification": 0.2,
+      "filterSize": 58,
+      "weight": 375,
+      "features": [
+        "OIS"
+      ],
+      "generation": 2
+    },
+    {
+      "id": "gf23-f4-r-lm-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF23mm F4 R LM WR",
+      "focalLength": {
+        "min": 23,
+        "max": 23
+      },
+      "aperture": {
+        "maxWide": 4.0,
+        "maxTele": 4.0
+      },
+      "opticalConstruction": {
+        "groups": 12,
+        "elements": 15
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.09,
+      "filterSize": 82,
+      "weight": 845,
+      "features": [
+        "R",
+        "LM",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf45-f28-r-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF45mm F2.8 R WR",
+      "focalLength": {
+        "min": 45,
+        "max": 45
+      },
+      "aperture": {
+        "maxWide": 2.8,
+        "maxTele": 2.8
+      },
+      "opticalConstruction": {
+        "groups": 8,
+        "elements": 11
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.14,
+      "filterSize": 62,
+      "weight": 490,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf63-f28-r-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF63mm F2.8 R WR",
+      "focalLength": {
+        "min": 63,
+        "max": 63
+      },
+      "aperture": {
+        "maxWide": 2.8,
+        "maxTele": 2.8
+      },
+      "opticalConstruction": {
+        "groups": 8,
+        "elements": 10
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.17,
+      "filterSize": 62,
+      "weight": 405,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf110-f2-r-lm-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF110mm F2 R LM WR",
+      "focalLength": {
+        "min": 110,
+        "max": 110
+      },
+      "aperture": {
+        "maxWide": 2.0,
+        "maxTele": 2.0
+      },
+      "opticalConstruction": {
+        "groups": 9,
+        "elements": 14
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.16,
+      "filterSize": 77,
+      "weight": 1010,
+      "features": [
+        "R",
+        "LM",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf120-f4-r-lm-ois-wr-macro",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF120mm F4 R LM OIS WR Macro",
+      "focalLength": {
+        "min": 120,
+        "max": 120
+      },
+      "aperture": {
+        "maxWide": 4.0,
+        "maxTele": 4.0
+      },
+      "opticalConstruction": {
+        "groups": 9,
+        "elements": 14
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.5,
+      "filterSize": 72,
+      "weight": 980,
+      "features": [
+        "R",
+        "LM",
+        "OIS",
+        "WR",
+        "Macro"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf250-f4-r-lm-ois-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF250mm F4 R LM OIS WR",
+      "focalLength": {
+        "min": 250,
+        "max": 250
+      },
+      "aperture": {
+        "maxWide": 4.0,
+        "maxTele": 4.0
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 16
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.22,
+      "filterSize": 82,
+      "weight": 1425,
+      "features": [
+        "R",
+        "LM",
+        "OIS",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf32-64-f4-r-lm-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "zoom",
+      "name": "GF32-64mm F4 R LM WR",
+      "focalLength": {
+        "min": 32,
+        "max": 64
+      },
+      "aperture": {
+        "maxWide": 4.0,
+        "maxTele": 4.0
+      },
+      "opticalConstruction": {
+        "groups": 11,
+        "elements": 14
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.12,
+      "filterSize": 77,
+      "weight": 875,
+      "features": [
+        "R",
+        "LM",
+        "WR"
+      ],
+      "generation": 1
+    }
+  ]
+}
