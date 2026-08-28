@@ -1,6 +1,20 @@
-# Fujifilm 富士鏡頭整理
-https://kiras0518.github.io/fujilens/xf1.html
+# Fujifilm Lens Database
 
-整理成HTML格式
+以 Astro 與 TypeScript 建置的 Fujifilm 原廠 XF、XC、GF 鏡頭靜態資料庫。
 
-網站參考PTT https://www.ptt.cc/bbs/DSLR/M.1534229117.A.C7C.html
+## 本機開發
+
+```sh
+pnpm install
+pnpm dev
+```
+
+## 驗證與建置
+
+```sh
+pnpm run validate:data
+pnpm run check
+pnpm run build
+```
+
+推送至 `master` 後，GitHub Actions 會發布至 [GitHub Pages](https://kiras0518.github.io/fujilens/)。
