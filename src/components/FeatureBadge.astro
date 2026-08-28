@@ -1,0 +1,14 @@
+---
+import type { FeatureDefinition } from "../types/lens";
+interface Props { code: string; definition: FeatureDefinition; compact?: boolean }
+const { code, definition, compact = false } = Astro.props;
+const label = `${code}：${definition.name}，${definition.nameZh}`;
+---
+
+<span class:list={["feature-badge", { compact }]} tabindex="0" aria-label={label}>
+  <b>[{code}]</b>
+  {!compact && <span class="feature-name">{definition.nameZh}</span>}
+  <span class="feature-tooltip" role="tooltip">
+    <strong>{code}</strong><span>{definition.name}</span><span>{definition.nameZh}</span>
+  </span>
+</span>

@@ -1,0 +1,20 @@
+---
+interface Props { lensCount: number }
+const { lensCount } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<header class="site-header">
+  <a class="brand" href={base} aria-label="Fujifilm Lens Database 首頁">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span>FUJIFILM LENS DB</span>
+  </a>
+  <nav class="desktop-nav" aria-label="主要導覽">
+    <a href={`${base}#about`}>ABOUT</a>
+    <span>{lensCount} LENSES</span>
+  </nav>
+  <details class="mobile-nav">
+    <summary aria-label="開啟選單">MENU</summary>
+    <nav aria-label="行動版導覽"><a href={`${base}#about`}>About</a><span>{lensCount} lenses</span></nav>
+  </details>
+</header>

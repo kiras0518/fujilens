@@ -1,0 +1,70 @@
+---
+import database from "../data/lenses.json";
+import FilterPanel from "../components/FilterPanel.astro";
+import Header from "../components/Header.astro";
+import LensCard from "../components/LensCard.astro";
+import LensTable from "../components/LensTable.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import type { LensDatabase } from "../types/lens";
+
+const { lenses, featureDefinitions } = database as LensDatabase;
+const initialLenses = [...lenses].sort((a, b) => a.focalLength.min - b.focalLength.min || a.name.localeCompare(b.name));
+const description = "整理 Fujifilm XF、XC、GF 原廠鏡頭規格，提供焦距、光圈、重量、放大倍率、OIS、WR、LM 等條件搜尋與篩選。";
+---
+
+<BaseLayout title="Fujifilm Lens Database｜富士 XF、XC、GF 鏡頭規格整理" description={description} socialImage={`${import.meta.env.BASE_URL}og.png`}>
+  <Header lensCount={lenses.length} />
+  <main class="page-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">THE FUJINON INDEX</p>
+      <h1 id="page-title">Find the lens.<br /><em>Frame the story.</em></h1>
+      <p>快速搜尋、篩選與查看 Fujifilm 原廠 XF、XC 與 GF 鏡頭規格。沒有價格，只有幫助你選擇焦段與功能的必要資訊。</p>
+    </section>
+
+    <div class="search-row">
+      <label class="search-box" for="lens-search">
+        <span class="search-symbol" aria-hidden="true">⌕</span><span class="sr-only">搜尋鏡頭</span>
+        <input id="lens-search" type="search" placeholder="Search 35mm, F1.4, Macro, WR…" autocomplete="off" data-search />
+        <button type="button" class="clear-search" aria-label="清除搜尋" data-clear-search hidden>×</button><kbd aria-hidden="true">/</kbd>
+      </label>
+      <button type="button" class="filter-trigger" data-open-filters aria-haspopup="dialog" aria-controls="filter-drawer">FILTERS <span data-active-filter-count></span></button>
+    </div>
+
+    <div class="catalog-layout">
+      <aside class="filters" aria-label="鏡頭篩選"><FilterPanel idPrefix="desktop" featureDefinitions={featureDefinitions} /></aside>
+      <section class="catalog-results" aria-labelledby="results-title" data-results data-view="cards">
+        <div class="results-head">
+          <div><p class="eyebrow" data-results-context>ALL LENSES</p><h2 id="results-title"><span data-results-count>{lenses.length}</span> lenses</h2></div>
+          <div class="result-controls">
+            <label class="sort-control"><span>SORT</span><select data-sort aria-label="排序鏡頭">
+              <option value="focal-asc">Focal Length ↑</option><option value="focal-desc">Focal Length ↓</option>
+              <option value="aperture-asc">Aperture ↑</option><option value="aperture-desc">Aperture ↓</option>
+              <option value="weight-asc">Weight ↑</option><option value="weight-desc">Weight ↓</option>
+              <option value="magnification-asc">Magnification ↑</option><option value="magnification-desc">Magnification ↓</option>
+            </select></label>
+            <div class="view-switch" aria-label="顯示方式"><button type="button" data-view-button="cards" aria-pressed="true">CARDS</button><button type="button" data-view-button="table" aria-pressed="false">TABLE</button></div>
+          </div>
+        </div>
+        <div class="lens-grid" data-card-grid>{initialLenses.map((lens) => <LensCard lens={lens} featureDefinitions={featureDefinitions} />)}</div>
+        <LensTable lenses={initialLenses} featureDefinitions={featureDefinitions} />
+        <div class="empty-state" data-empty-state hidden><span aria-hidden="true">∅</span><h3>No lenses found</h3><p>沒有符合目前搜尋與篩選條件的鏡頭。</p><button type="button" class="secondary-button" data-reset-all>RESET ALL</button></div>
+      </section>
+    </div>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <p class="eyebrow">ABOUT THE DATABASE</p><h2 id="about-title">Specs, not sales.</h2>
+      <div><p>Fujifilm Lens Database 專門整理 Fujifilm 原廠 XF、XC 與 GF 鏡頭。以焦距、光圈、重量與鏡頭功能為核心，讓規格查找保持快速而純粹。</p><p>資料來自專案內的單一 JSON 檔案，頁面不包含價格、購物連結、評分或第三方鏡頭。</p></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>FUJIFILM LENS DB</span><span>{lenses.length} ORIGINAL FUJINON LENSES</span></footer>
+
+  <dialog class="filter-drawer" id="filter-drawer" data-filter-drawer>
+    <div class="drawer-header"><div><p class="eyebrow">REFINE RESULTS</p><h2>Filters</h2></div><button type="button" class="drawer-close" data-close-filters aria-label="關閉篩選">×</button></div>
+    <div class="drawer-body"><FilterPanel idPrefix="mobile" featureDefinitions={featureDefinitions} mobile /></div>
+    <div class="drawer-footer"><button type="button" class="primary-button" data-apply-filters>SHOW <span data-drawer-count>{lenses.length}</span> LENSES</button></div>
+  </dialog>
+
+  <script is:inline type="application/json" id="lens-database" set:html={JSON.stringify(database)}></script>
+  <script>import "../scripts/catalog";</script>
+</BaseLayout>

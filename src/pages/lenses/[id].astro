@@ -1,0 +1,57 @@
+---
+import database from "../../data/lenses.json";
+import FeatureBadge from "../../components/FeatureBadge.astro";
+import Header from "../../components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatAperture, formatFilter, formatFocalLength, formatMagnification } from "../../lib/format";
+import type { Lens, LensDatabase } from "../../types/lens";
+
+export function getStaticPaths() {
+  const { lenses } = database as LensDatabase;
+  return lenses.map((lens) => ({ params: { id: lens.id }, props: { lens } }));
+}
+
+interface Props { lens: Lens }
+const { lens } = Astro.props as Props;
+const { lenses, featureDefinitions } = database as LensDatabase;
+const base = import.meta.env.BASE_URL;
+const title = `${lens.name} 規格｜Fujifilm Lens Database`;
+const description = `${lens.name} 完整規格：${formatFocalLength(lens)}、${formatAperture(lens)}、${lens.weight}g，並整理鏡頭結構、放大倍率與功能。`;
+---
+
+<BaseLayout title={title} description={description} socialImage={null}>
+  <Header lensCount={lenses.length} />
+  <main class="detail-shell">
+    <nav class="breadcrumb" aria-label="麵包屑"><a href={base}>← ALL LENSES</a><span>/</span><span>{lens.series}</span></nav>
+    <header class="detail-hero">
+      <div class="detail-kicker"><span class="series-chip">{lens.series}</span><span>{lens.mount} MOUNT</span><span>{lens.type === "prime" ? "PRIME · 定焦" : "ZOOM · 變焦"}</span></div>
+      <h1>{lens.name}</h1>
+      <div class="detail-primary-specs">
+        <div><span>FOCAL LENGTH</span><strong>{formatFocalLength(lens)}</strong></div>
+        <div><span>MAXIMUM APERTURE</span><strong>{formatAperture(lens)}</strong></div>
+      </div>
+      <div class="detail-features" aria-label="鏡頭功能">{lens.features.map((code) => <FeatureBadge code={code} definition={featureDefinitions[code]} />)}</div>
+    </header>
+
+    <div class="detail-sections">
+      <section class="spec-section" aria-labelledby="optical-title">
+        <div class="section-number">01</div><div><p class="eyebrow">OPTICAL</p><h2 id="optical-title">Optical specifications</h2>
+          <dl class="detail-spec-list">
+            <div><dt>Focal Length</dt><dd>{formatFocalLength(lens)}</dd></div><div><dt>Maximum Aperture</dt><dd>{formatAperture(lens)}</dd></div>
+            <div><dt>Lens Construction</dt><dd>{lens.opticalConstruction.groups} groups / {lens.opticalConstruction.elements} elements</dd></div>
+            <div><dt>Aperture Blades</dt><dd>{lens.apertureBlades}</dd></div><div><dt>Maximum Magnification</dt><dd>{formatMagnification(lens.maxMagnification)}</dd></div>
+          </dl>
+        </div>
+      </section>
+      <section class="spec-section" aria-labelledby="physical-title">
+        <div class="section-number">02</div><div><p class="eyebrow">PHYSICAL</p><h2 id="physical-title">Physical specifications</h2>
+          <dl class="detail-spec-list">
+            <div><dt>Filter Size</dt><dd>{formatFilter(lens.filterSize)}</dd></div><div><dt>Weight</dt><dd>{lens.weight}g</dd></div>
+            <div><dt>Series</dt><dd>{lens.series}</dd></div><div><dt>Mount</dt><dd>{lens.mount} Mount</dd></div><div><dt>Generation</dt><dd>{lens.generation}</dd></div>
+          </dl>
+        </div>
+      </section>
+    </div>
+    <div class="detail-bottom-link"><a href={base}>← BACK TO ALL {lenses.length} LENSES</a></div>
+  </main>
+</BaseLayout>

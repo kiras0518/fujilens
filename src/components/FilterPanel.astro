@@ -1,0 +1,54 @@
+---
+import type { FeatureDefinition } from "../types/lens";
+interface Props { idPrefix: string; featureDefinitions: Record<string, FeatureDefinition>; mobile?: boolean }
+const { idPrefix, featureDefinitions, mobile = false } = Astro.props;
+const features = Object.entries(featureDefinitions);
+const groups = [
+  { group: "mount", options: [{ value: "X", label: "X Mount" }, { value: "G", label: "G Mount" }] },
+  { group: "series", options: [{ value: "XF", label: "XF" }, { value: "XC", label: "XC" }, { value: "GF", label: "GF" }] },
+  { group: "type", options: [{ value: "prime", label: "Prime · 定焦" }, { value: "zoom", label: "Zoom · 變焦" }] },
+];
+---
+
+<div class:list={["filter-panel", { "filter-panel-mobile": mobile }]} data-filter-panel>
+  {!mobile && <div class="filter-heading"><strong>FILTERS</strong><button type="button" class="text-button" data-reset>RESET</button></div>}
+  {groups.map(({ group, options }) => (
+    <fieldset class="filter-group">
+      <legend>{group.toUpperCase()}</legend>
+      <div class="filter-options">
+        {options.map(({ value, label }) => (
+          <label class="check-control" for={`${idPrefix}-${group}-${value}`}>
+            <input id={`${idPrefix}-${group}-${value}`} type="checkbox" value={value} data-filter={group} />
+            <span class="check-box" aria-hidden="true"></span><span>{label}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  ))}
+  <fieldset class="filter-group">
+    <legend>FEATURES</legend>
+    <div class="filter-options feature-options">
+      {features.map(([code, definition]) => (
+        <label class="check-control" for={`${idPrefix}-feature-${code}`}>
+          <input id={`${idPrefix}-feature-${code}`} type="checkbox" value={code} data-filter="feature" />
+          <span class="check-box" aria-hidden="true"></span><span><b>{code}</b><small>{definition.nameZh}</small></span>
+        </label>
+      ))}
+    </div>
+  </fieldset>
+  <fieldset class="filter-group range-group">
+    <legend>FOCAL LENGTH</legend><output data-range-output="focal">8–400mm</output>
+    <div class="range-pair">
+      <label><span>MIN</span><input type="range" min="8" max="400" value="8" data-range="focal" data-bound="min" /></label>
+      <label><span>MAX</span><input type="range" min="8" max="400" value="400" data-range="focal" data-bound="max" /></label>
+    </div>
+  </fieldset>
+  <fieldset class="filter-group range-group">
+    <legend>WEIGHT</legend><output data-range-output="weight">78–2,265g</output>
+    <div class="range-pair">
+      <label><span>MIN</span><input type="range" min="78" max="2265" value="78" data-range="weight" data-bound="min" /></label>
+      <label><span>MAX</span><input type="range" min="78" max="2265" value="2265" data-range="weight" data-bound="max" /></label>
+    </div>
+  </fieldset>
+  {mobile && <button type="button" class="secondary-button drawer-reset" data-reset>RESET FILTERS</button>}
+</div>
