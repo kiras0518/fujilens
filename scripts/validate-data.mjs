@@ -4,7 +4,7 @@ const database = JSON.parse(readFileSync(new URL("../src/data/lenses.json", impo
 const { featureDefinitions, lenses } = database;
 const fail = (message) => { throw new Error(`Lens data validation failed: ${message}`); };
 
-if (!Array.isArray(lenses) || lenses.length !== 54) fail("expected exactly 54 lenses");
+if (!Array.isArray(lenses) || lenses.length !== 63) fail("expected exactly 63 lenses");
 if (!featureDefinitions || Object.keys(featureDefinitions).length !== 7) fail("expected 7 feature definitions");
 for (const [code, definition] of Object.entries(featureDefinitions)) if (!definition.description) fail(`feature ${code} needs a description`);
 if (new Set(lenses.map(({ id }) => id)).size !== lenses.length) fail("lens IDs must be unique");
@@ -29,6 +29,6 @@ for (const lens of lenses) {
 }
 
 const seriesCounts = Object.fromEntries(["XF", "XC", "GF"].map((series) => [series, lenses.filter((lens) => lens.series === series).length]));
-if (seriesCounts.XF !== 41 || seriesCounts.XC !== 6 || seriesCounts.GF !== 7) fail(`unexpected series totals ${JSON.stringify(seriesCounts)}`);
+if (seriesCounts.XF !== 41 || seriesCounts.XC !== 6 || seriesCounts.GF !== 16) fail(`unexpected series totals ${JSON.stringify(seriesCounts)}`);
 
 console.log(`Validated ${lenses.length} lenses and ${Object.keys(featureDefinitions).length} feature definitions.`);
