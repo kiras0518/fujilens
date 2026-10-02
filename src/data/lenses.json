@@ -1400,6 +1400,34 @@
       "generation": 1
     },
     {
+      "id": "gf30-f35-r-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF30mm F3.5 R WR",
+      "focalLength": {
+        "min": 30,
+        "max": 30
+      },
+      "aperture": {
+        "maxWide": 3.5,
+        "maxTele": 3.5
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 13
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.15,
+      "filterSize": 58,
+      "weight": 510,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
       "id": "gf45-f28-r-wr",
       "series": "GF",
       "mount": "G",
@@ -1428,6 +1456,63 @@
       "generation": 1
     },
     {
+      "id": "gf50-f35-r-lm-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF50mm F3.5 R LM WR",
+      "focalLength": {
+        "min": 50,
+        "max": 50
+      },
+      "aperture": {
+        "maxWide": 3.5,
+        "maxTele": 3.5
+      },
+      "opticalConstruction": {
+        "groups": 6,
+        "elements": 9
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.1,
+      "filterSize": 62,
+      "weight": 335,
+      "features": [
+        "R",
+        "LM",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf55-f17-r-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF55mm F1.7 R WR",
+      "focalLength": {
+        "min": 55,
+        "max": 55
+      },
+      "aperture": {
+        "maxWide": 1.7,
+        "maxTele": 1.7
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 14
+      },
+      "apertureBlades": 11,
+      "maxMagnification": 0.17,
+      "filterSize": 77,
+      "weight": 780,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
       "id": "gf63-f28-r-wr",
       "series": "GF",
       "mount": "G",
@@ -1449,6 +1534,34 @@
       "maxMagnification": 0.17,
       "filterSize": 62,
       "weight": 405,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf80-f17-r-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF80mm F1.7 R WR",
+      "focalLength": {
+        "min": 80,
+        "max": 80
+      },
+      "aperture": {
+        "maxWide": 1.7,
+        "maxTele": 1.7
+      },
+      "opticalConstruction": {
+        "groups": 9,
+        "elements": 12
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.15,
+      "filterSize": 77,
+      "weight": 795,
       "features": [
         "R",
         "WR"
@@ -1546,6 +1659,64 @@
       "generation": 1
     },
     {
+      "id": "gf500-f56-r-lm-ois-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "prime",
+      "name": "GF500mm F5.6 R LM OIS WR",
+      "focalLength": {
+        "min": 500,
+        "max": 500
+      },
+      "aperture": {
+        "maxWide": 5.6,
+        "maxTele": 5.6
+      },
+      "opticalConstruction": {
+        "groups": 14,
+        "elements": 21
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.2,
+      "filterSize": 95,
+      "weight": 1375,
+      "features": [
+        "R",
+        "LM",
+        "OIS",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf20-35-f4-r-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "zoom",
+      "name": "GF20-35mm F4 R WR",
+      "focalLength": {
+        "min": 20,
+        "max": 35
+      },
+      "aperture": {
+        "maxWide": 4,
+        "maxTele": 4
+      },
+      "opticalConstruction": {
+        "groups": 10,
+        "elements": 14
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.14,
+      "filterSize": 82,
+      "weight": 725,
+      "features": [
+        "R",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
       "id": "gf32-64-f4-r-lm-wr",
       "series": "GF",
       "mount": "G",
@@ -1570,6 +1741,93 @@
       "features": [
         "R",
         "LM",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf35-70-f45-56-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "zoom",
+      "name": "GF35-70mm F4.5-5.6 WR",
+      "focalLength": {
+        "min": 35,
+        "max": 70
+      },
+      "aperture": {
+        "maxWide": 4.5,
+        "maxTele": 5.6
+      },
+      "opticalConstruction": {
+        "groups": 9,
+        "elements": 11
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.28,
+      "filterSize": 62,
+      "weight": 390,
+      "features": [
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf45-100-f4-r-lm-ois-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "zoom",
+      "name": "GF45-100mm F4 R LM OIS WR",
+      "focalLength": {
+        "min": 45,
+        "max": 100
+      },
+      "aperture": {
+        "maxWide": 4,
+        "maxTele": 4
+      },
+      "opticalConstruction": {
+        "groups": 12,
+        "elements": 16
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.13,
+      "filterSize": 82,
+      "weight": 1005,
+      "features": [
+        "R",
+        "LM",
+        "OIS",
+        "WR"
+      ],
+      "generation": 1
+    },
+    {
+      "id": "gf100-200-f56-r-lm-ois-wr",
+      "series": "GF",
+      "mount": "G",
+      "type": "zoom",
+      "name": "GF100-200mm F5.6 R LM OIS WR",
+      "focalLength": {
+        "min": 100,
+        "max": 200
+      },
+      "aperture": {
+        "maxWide": 5.6,
+        "maxTele": 5.6
+      },
+      "opticalConstruction": {
+        "groups": 13,
+        "elements": 20
+      },
+      "apertureBlades": 9,
+      "maxMagnification": 0.2,
+      "filterSize": 67,
+      "weight": 1050,
+      "features": [
+        "R",
+        "LM",
+        "OIS",
         "WR"
       ],
       "generation": 1
