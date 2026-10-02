@@ -2,31 +2,38 @@
   "featureDefinitions": {
     "R": {
       "name": "Aperture Ring",
-      "nameZh": "光圈環"
+      "nameZh": "光圈環",
+      "description": "鏡身有光圈環，可直接轉動調整光圈。"
     },
     "WR": {
       "name": "Weather Resistant",
-      "nameZh": "全天候"
+      "nameZh": "全天候",
+      "description": "防塵防滴設計，可在 -10°C 環境使用。"
     },
     "OIS": {
       "name": "Optical Image Stabilization",
-      "nameZh": "光學防手震"
+      "nameZh": "光學防手震",
+      "description": "鏡頭內建光學防手震，慢速快門與錄影更穩定。"
     },
     "LM": {
       "name": "Linear Motor",
-      "nameZh": "線性對焦馬達"
+      "nameZh": "線性對焦馬達",
+      "description": "線性馬達驅動對焦，快速且安靜。"
     },
     "APD": {
       "name": "Apodization Filter",
-      "nameZh": "變跡濾鏡"
+      "nameZh": "變跡濾鏡",
+      "description": "變跡濾鏡讓散景邊緣更柔和滑順。"
     },
     "Macro": {
       "name": "Macro",
-      "nameZh": "微距"
+      "nameZh": "微距",
+      "description": "支援近距離拍攝，放大倍率高。"
     },
     "PZ": {
       "name": "Power Zoom",
-      "nameZh": "電動變焦"
+      "nameZh": "電動變焦",
+      "description": "電動變焦，錄影時變焦更平順。"
     }
   },
   "lenses": [

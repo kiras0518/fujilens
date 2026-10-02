@@ -1,0 +1,9 @@
+---
+const base = import.meta.env.BASE_URL;
+---
+
+<aside class="compare-tray" aria-label="比較清單" data-compare-tray hidden>
+  <span class="compare-tray-label">比較</span>
+  <ul class="compare-tray-items" data-compare-items></ul>
+  <a class="primary-button" href={`${base}compare/`} data-compare-link>開始比較 →</a>
+</aside>

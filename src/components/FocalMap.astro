@@ -1,0 +1,60 @@
+---
+import { formatEquivalentFocal } from "../lib/format";
+import { AXIS_TICKS, byFocal, focalPercent, focalSpan } from "../lib/lens-math";
+import type { Lens, Mount } from "../types/lens";
+
+interface Props { lenses: Lens[] }
+
+const { lenses } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const ROW_HEIGHT = 10;
+
+const lanes: { mount: Mount; label: string; hint: string }[] = [
+  { mount: "X", label: "X", hint: "APS-C ×1.5" },
+  { mount: "G", label: "GFX", hint: "中片幅 ×0.79" },
+];
+
+// Greedy row packing so overlapping ranges stack instead of covering each other.
+const packLane = (mount: Mount) => {
+  const rowEnds: number[] = [];
+  const bars = lenses.filter((lens) => lens.mount === mount).sort(byFocal).map((lens) => {
+    const { left, width } = focalSpan(lens, 0.9);
+    let row = rowEnds.findIndex((end) => end < left);
+    if (row === -1) row = rowEnds.push(0) - 1;
+    rowEnds[row] = left + width + 0.5;
+    return { lens, left, width, row };
+  });
+  return { bars, rows: rowEnds.length };
+};
+---
+
+<section class="focal-map" aria-labelledby="focal-map-title">
+  <div class="focal-map-head">
+    <h2 id="focal-map-title">焦段地圖</h2>
+    <p>35mm 等效焦距 · 對數刻度 · 點擊鏡頭查看規格</p>
+  </div>
+  {lanes.map(({ mount, label, hint }) => {
+    const { bars, rows } = packLane(mount);
+    return (
+      <div class="focal-lane">
+        <div class="focal-lane-label">{label}<small>{hint}</small></div>
+        <div class="focal-lane-track" style={`height:${rows * ROW_HEIGHT}px`}>
+          {AXIS_TICKS.map((tick) => <i class="focal-gridline" style={`left:${focalPercent(tick)}%`}></i>)}
+          {bars.map(({ lens, left, width, row }) => (
+            <a
+              class:list={["focal-map-bar", `series-${lens.series.toLowerCase()}`]}
+              href={`${base}lenses/${lens.id}/`}
+              style={`left:${left}%;width:${width}%;top:${row * ROW_HEIGHT}px`}
+              data-map-id={lens.id}
+              data-label={`${lens.name} · 等效 ${formatEquivalentFocal(lens)}`}
+              aria-label={`${lens.name}，等效 ${formatEquivalentFocal(lens)}`}
+            ></a>
+          ))}
+        </div>
+      </div>
+    );
+  })}
+  <div class="focal-axis" aria-hidden="true">
+    {AXIS_TICKS.map((tick) => <span style={`left:${focalPercent(tick)}%`}>{tick}</span>)}
+  </div>
+</section>

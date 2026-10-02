@@ -1,0 +1,32 @@
+---
+import FeatureBadge from "./FeatureBadge.astro";
+import FocalBar from "./FocalBar.astro";
+import FocalValue from "./FocalValue.astro";
+import { formatAperture, formatWeight } from "../lib/format";
+import { TYPE_LABEL } from "../lib/lens-math";
+import type { FeatureDefinition, Lens } from "../types/lens";
+
+interface Props { lens: Lens; featureDefinitions: Record<string, FeatureDefinition> }
+
+const { lens, featureDefinitions } = Astro.props;
+const detailUrl = `${import.meta.env.BASE_URL}lenses/${lens.id}/`;
+---
+
+<article class="lens-row" data-lens-id={lens.id}>
+  <span class:list={["series-chip", `series-${lens.series.toLowerCase()}`]}>{lens.series}</span>
+  <div class="lens-name">
+    <h3><a href={detailUrl}>{lens.name}</a></h3>
+    <p>{TYPE_LABEL[lens.type]} · {lens.mount === "G" ? "G 卡口" : "X 卡口"}</p>
+  </div>
+  <div class="lens-focal">
+    <FocalBar lens={lens} />
+    <p class="num"><FocalValue lens={lens} note /></p>
+  </div>
+  <div class="lens-stat num"><b>{formatAperture(lens)}</b><span>最大光圈</span></div>
+  <div class="lens-stat num"><b>{formatWeight(lens.weight)}</b><span>重量</span></div>
+  <div class="lens-features">{lens.features.map((code) => <FeatureBadge code={code} definition={featureDefinitions[code]} />)}</div>
+  <p class="lens-mobile-meta num"><b>{formatAperture(lens)}</b><span>{formatWeight(lens.weight)}</span>{lens.features.map((code) => <FeatureBadge code={code} definition={featureDefinitions[code]} />)}</p>
+  <button type="button" class="compare-toggle" data-compare-toggle={lens.id} aria-pressed="false" aria-label={`將 ${lens.name} 加入比較`}>
+    <span aria-hidden="true">+</span>
+  </button>
+</article>

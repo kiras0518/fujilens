@@ -1,0 +1,12 @@
+---
+import { formatEquivalentFocal, formatFocalLength } from "../lib/format";
+import type { Lens } from "../types/lens";
+
+interface Props { lens: Lens; note?: boolean }
+
+const { lens, note = false } = Astro.props;
+---
+
+<span class="focal-value"><span class="focal-actual">{formatFocalLength(lens)}</span><span class="focal-equivalent">{formatEquivalentFocal(lens)}</span></span>{note && (
+  <small class="focal-note"><span class="focal-actual">≈ {formatEquivalentFocal(lens)} 等效</span><span class="focal-equivalent">等效 · 實際 {formatFocalLength(lens)}</span></small>
+)}

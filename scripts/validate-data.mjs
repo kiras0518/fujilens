@@ -6,6 +6,7 @@ const fail = (message) => { throw new Error(`Lens data validation failed: ${mess
 
 if (!Array.isArray(lenses) || lenses.length !== 35) fail("expected exactly 35 lenses");
 if (!featureDefinitions || Object.keys(featureDefinitions).length !== 7) fail("expected 7 feature definitions");
+for (const [code, definition] of Object.entries(featureDefinitions)) if (!definition.description) fail(`feature ${code} needs a description`);
 if (new Set(lenses.map(({ id }) => id)).size !== lenses.length) fail("lens IDs must be unique");
 
 const allowedSeries = new Set(["XF", "XC", "GF"]);

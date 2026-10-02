@@ -1,9 +1,11 @@
 ---
 import database from "../../data/lenses.json";
-import FeatureBadge from "../../components/FeatureBadge.astro";
 import Header from "../../components/Header.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { formatAperture, formatFilter, formatFocalLength, formatMagnification } from "../../lib/format";
+import {
+  formatAperture, formatConstruction, formatEquivalentFocal, formatFilter, formatFocalLength, formatMagnification, formatWeight,
+} from "../../lib/format";
+import { AXIS_TICKS, MOUNT_LABEL, TYPE_LABEL, focalPercent, focalSpan, neighbors, similarLenses } from "../../lib/lens-math";
 import type { Lens, LensDatabase } from "../../types/lens";
 
 export function getStaticPaths() {
@@ -12,46 +14,112 @@ export function getStaticPaths() {
 }
 
 interface Props { lens: Lens }
+
 const { lens } = Astro.props as Props;
 const { lenses, featureDefinitions } = database as LensDatabase;
 const base = import.meta.env.BASE_URL;
+const detailUrl = (other: Lens) => `${base}lenses/${other.id}/`;
+const { prev, next } = neighbors(lens, lenses);
+const similar = similarLenses(lens, lenses);
+const sameMount = lenses.filter((other) => other.mount === lens.mount && other.id !== lens.id);
+const span = focalSpan(lens);
 const title = `${lens.name} 規格｜Fujifilm Lens Database`;
-const description = `${lens.name} 完整規格：${formatFocalLength(lens)}、${formatAperture(lens)}、${lens.weight}g，並整理鏡頭結構、放大倍率與功能。`;
+const description = `${lens.name} 完整規格：${formatFocalLength(lens)}（等效 ${formatEquivalentFocal(lens)}）、${formatAperture(lens)}、${lens.weight}g，並整理鏡頭結構、放大倍率與功能。`;
+
+const tiles = [
+  { label: "焦距", value: formatFocalLength(lens), note: `≈ ${formatEquivalentFocal(lens)} 等效` },
+  { label: "最大光圈", value: formatAperture(lens), note: `${lens.apertureBlades} 片光圈葉片` },
+  { label: "重量", value: formatWeight(lens.weight), note: `濾鏡 ${formatFilter(lens.filterSize)}` },
+  { label: "最大放大倍率", value: formatMagnification(lens.maxMagnification), note: formatConstruction(lens) },
+];
+const opticalSpecs = [
+  ["焦距", `${formatFocalLength(lens)}（等效 ${formatEquivalentFocal(lens)}）`],
+  ["最大光圈", formatAperture(lens)],
+  ["鏡片結構", formatConstruction(lens)],
+  ["光圈葉片", String(lens.apertureBlades)],
+  ["最大放大倍率", formatMagnification(lens.maxMagnification)],
+];
+const physicalSpecs = [
+  ["重量", formatWeight(lens.weight)],
+  ["濾鏡口徑", formatFilter(lens.filterSize)],
+  ["系列", lens.series],
+  ["卡口", `${lens.mount} Mount`],
+  ["世代", `第 ${lens.generation} 代`],
+];
 ---
 
 <BaseLayout title={title} description={description} socialImage={null}>
-  <Header lensCount={lenses.length} />
+  <Header />
   <main class="detail-shell">
-    <nav class="breadcrumb" aria-label="麵包屑"><a href={base}>← ALL LENSES</a><span>/</span><span>{lens.series}</span></nav>
+    <nav class="breadcrumb" aria-label="麵包屑"><a href={base}>← 全部鏡頭</a><span aria-hidden="true">/</span><span>{lens.series}</span></nav>
+
     <header class="detail-hero">
-      <div class="detail-kicker"><span class="series-chip">{lens.series}</span><span>{lens.mount} MOUNT</span><span>{lens.type === "prime" ? "PRIME · 定焦" : "ZOOM · 變焦"}</span></div>
+      <p class="detail-kicker">
+        <span class:list={["series-chip", `series-${lens.series.toLowerCase()}`]}>{lens.series}</span>
+        <span>{MOUNT_LABEL[lens.mount]} · {TYPE_LABEL[lens.type]}</span>
+      </p>
       <h1>{lens.name}</h1>
-      <div class="detail-primary-specs">
-        <div><span>FOCAL LENGTH</span><strong>{formatFocalLength(lens)}</strong></div>
-        <div><span>MAXIMUM APERTURE</span><strong>{formatAperture(lens)}</strong></div>
-      </div>
-      <div class="detail-features" aria-label="鏡頭功能">{lens.features.map((code) => <FeatureBadge code={code} definition={featureDefinitions[code]} />)}</div>
+      <button type="button" class="primary-button" data-compare-toggle={lens.id} data-label-on="✓ 已加入比較" data-label-off="+ 加入比較" aria-pressed="false">
+        <span>+ 加入比較</span>
+      </button>
     </header>
 
-    <div class="detail-sections">
-      <section class="spec-section" aria-labelledby="optical-title">
-        <div class="section-number">01</div><div><p class="eyebrow">OPTICAL</p><h2 id="optical-title">Optical specifications</h2>
-          <dl class="detail-spec-list">
-            <div><dt>Focal Length</dt><dd>{formatFocalLength(lens)}</dd></div><div><dt>Maximum Aperture</dt><dd>{formatAperture(lens)}</dd></div>
-            <div><dt>Lens Construction</dt><dd>{lens.opticalConstruction.groups} groups / {lens.opticalConstruction.elements} elements</dd></div>
-            <div><dt>Aperture Blades</dt><dd>{lens.apertureBlades}</dd></div><div><dt>Maximum Magnification</dt><dd>{formatMagnification(lens.maxMagnification)}</dd></div>
-          </dl>
-        </div>
-      </section>
-      <section class="spec-section" aria-labelledby="physical-title">
-        <div class="section-number">02</div><div><p class="eyebrow">PHYSICAL</p><h2 id="physical-title">Physical specifications</h2>
-          <dl class="detail-spec-list">
-            <div><dt>Filter Size</dt><dd>{formatFilter(lens.filterSize)}</dd></div><div><dt>Weight</dt><dd>{lens.weight}g</dd></div>
-            <div><dt>Series</dt><dd>{lens.series}</dd></div><div><dt>Mount</dt><dd>{lens.mount} Mount</dd></div><div><dt>Generation</dt><dd>{lens.generation}</dd></div>
-          </dl>
-        </div>
-      </section>
+    <dl class="spec-tiles num">
+      {tiles.map(({ label, value, note }) => <div><dt>{label}</dt><dd>{value}</dd><dd class="tile-note">{note}</dd></div>)}
+    </dl>
+
+    <figure class="focal-position">
+      <figcaption>在 {lens.mount === "G" ? "GFX" : "X"} 系統焦段中的位置（35mm 等效）</figcaption>
+      <div class="focal-position-track" aria-hidden="true">
+        {sameMount.map((other) => {
+          const otherSpan = focalSpan(other);
+          return <i class="focal-position-other" style={`left:${otherSpan.left}%;width:${otherSpan.width}%`}></i>;
+        })}
+        <i class="focal-position-current" style={`left:${span.left}%;width:${span.width}%`}></i>
+      </div>
+      <div class="focal-axis" aria-hidden="true">{AXIS_TICKS.map((tick) => <span style={`left:${focalPercent(tick)}%`}>{tick}</span>)}</div>
+    </figure>
+
+    <div class="detail-grid">
+      <div>
+        <section class="detail-section" aria-labelledby="optical-title">
+          <h2 id="optical-title">光學規格</h2>
+          <dl class="spec-list num">{opticalSpecs.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+        </section>
+        <section class="detail-section" aria-labelledby="physical-title">
+          <h2 id="physical-title">機身規格</h2>
+          <dl class="spec-list num">{physicalSpecs.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+        </section>
+      </div>
+      <div>
+        <section class="detail-section" aria-labelledby="features-title">
+          <h2 id="features-title">功能</h2>
+          {lens.features.length ? (
+            <ul class="feature-list">
+              {lens.features.map((code) => {
+                const definition = featureDefinitions[code];
+                return <li><b>{code}</b><p><strong>{definition.nameZh}</strong> · {definition.name}<br />{definition.description}</p></li>;
+              })}
+            </ul>
+          ) : <p class="muted">無特殊功能標記。</p>}
+        </section>
+        <section class="detail-section" aria-labelledby="similar-title">
+          <h2 id="similar-title">相近焦段</h2>
+          <ul class="similar-list">
+            {similar.map((other) => (
+              <li>
+                <a href={detailUrl(other)}>{other.name}<small class="num">{formatFocalLength(other)} · {formatAperture(other)} · {formatWeight(other.weight)}</small></a>
+                <a class="similar-compare" href={`${base}compare/?ids=${lens.id},${other.id}`}>比較 →</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
     </div>
-    <div class="detail-bottom-link"><a href={base}>← BACK TO ALL {lenses.length} LENSES</a></div>
+
+    <nav class="prev-next" aria-label="同系統鏡頭">
+      {prev ? <a href={detailUrl(prev)}><small>← 上一支</small>{prev.name}</a> : <span></span>}
+      {next && <a class="next" href={detailUrl(next)}><small>下一支 →</small>{next.name}</a>}
+    </nav>
   </main>
 </BaseLayout>

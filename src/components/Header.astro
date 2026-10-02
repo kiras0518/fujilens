@@ -1,20 +1,36 @@
 ---
-interface Props { lensCount: number }
-const { lensCount } = Astro.props;
+interface Props {
+  /** On the catalog page the search filters live and the mobile filter button is shown. */
+  catalog?: boolean;
+}
+
+const { catalog = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
 <header class="site-header">
-  <a class="brand" href={base} aria-label="Fujifilm Lens Database 首頁">
+  <a class="brand" href={base} aria-label="FujiLens 首頁">
     <span class="brand-mark" aria-hidden="true"></span>
-    <span>FUJIFILM LENS DB</span>
+    <span>FUJILENS</span>
   </a>
-  <nav class="desktop-nav" aria-label="主要導覽">
-    <a href={`${base}#about`}>ABOUT</a>
-    <span>{lensCount} LENSES</span>
-  </nav>
-  <details class="mobile-nav">
-    <summary aria-label="開啟選單">MENU</summary>
-    <nav aria-label="行動版導覽"><a href={`${base}#about`}>About</a><span>{lensCount} lenses</span></nav>
-  </details>
+  <form class="search-box" action={base} method="get" role="search" data-search-form>
+    <span class="search-symbol" aria-hidden="true">⌕</span>
+    <label class="sr-only" for="lens-search">搜尋鏡頭</label>
+    <input id="lens-search" name="q" type="search" placeholder="搜尋 35mm、F1.4、WR、微距…" autocomplete="off" data-search />
+    <button type="button" class="clear-search" aria-label="清除搜尋" data-clear-search hidden>×</button>
+    <kbd aria-hidden="true">/</kbd>
+  </form>
+  <div class="header-actions">
+    {catalog && (
+      <button type="button" class="icon-button filter-trigger" data-open-filters aria-haspopup="dialog" aria-controls="filter-drawer">
+        篩選 <span class="badge" data-active-filter-count hidden></span>
+      </button>
+    )}
+    <a class="icon-button" href={`${base}compare/`} data-compare-link>
+      比較 <span class="badge" data-compare-count hidden>0</span>
+    </a>
+    <button type="button" class="icon-button theme-toggle" data-theme-toggle aria-label="切換深淺色模式">
+      <span aria-hidden="true">◐</span>
+    </button>
+  </div>
 </header>

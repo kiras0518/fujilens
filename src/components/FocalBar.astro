@@ -1,0 +1,13 @@
+---
+import { focalSpan } from "../lib/lens-math";
+import type { Lens } from "../types/lens";
+
+interface Props { lens: Lens }
+
+const { lens } = Astro.props;
+const { left, width } = focalSpan(lens);
+---
+
+<div class="focal-bar" aria-hidden="true">
+  <span style={`left:${left}%;width:${width}%`}></span>
+</div>

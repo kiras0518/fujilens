@@ -1,0 +1,36 @@
+---
+import database from "../data/lenses.json";
+import Header from "../components/Header.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { byFocal } from "../lib/lens-math";
+import type { LensDatabase } from "../types/lens";
+
+const { lenses } = database as LensDatabase;
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="鏡頭比較｜Fujifilm Lens Database" description="並排比較 Fujifilm 原廠鏡頭的焦距、等效焦距、光圈、重量與功能。" socialImage={null} compareTray={false}>
+  <Header />
+  <main class="detail-shell compare-shell">
+    <nav class="breadcrumb" aria-label="麵包屑"><a href={base}>← 全部鏡頭</a></nav>
+    <div class="compare-head">
+      <h1 data-compare-title>鏡頭比較</h1>
+      <div class="compare-tools">
+        <label class="sort-control"><span class="sr-only">加入鏡頭</span>
+          <select data-compare-add>
+            <option value="">＋ 加入鏡頭…</option>
+            {[...lenses].sort(byFocal).map((lens) => <option value={lens.id}>{lens.name}</option>)}
+          </select>
+        </label>
+        <label class="switch"><input type="checkbox" data-compare-diff /> 只顯示差異</label>
+      </div>
+    </div>
+    <div data-compare-root></div>
+    <div class="empty-state" data-compare-empty hidden>
+      <h2>尚未選擇鏡頭</h2>
+      <p>在鏡頭列表按「+」加入，或用上方選單挑選，最多 4 支。</p>
+      <a class="secondary-button" href={base}>瀏覽鏡頭</a>
+    </div>
+  </main>
+  <script>import "../scripts/compare";</script>
+</BaseLayout>
