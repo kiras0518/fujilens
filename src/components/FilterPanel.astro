@@ -1,54 +1,73 @@
 ---
+import { APERTURE_OPTIONS, FOCAL_PRESETS, SLIDER_RANGE, SLIDER_STEPS, WEIGHT_LIMIT } from "../lib/lens-math";
 import type { FeatureDefinition } from "../types/lens";
-interface Props { idPrefix: string; featureDefinitions: Record<string, FeatureDefinition>; mobile?: boolean }
-const { idPrefix, featureDefinitions, mobile = false } = Astro.props;
-const features = Object.entries(featureDefinitions);
-const groups = [
-  { group: "mount", options: [{ value: "X", label: "X Mount" }, { value: "G", label: "G Mount" }] },
-  { group: "series", options: [{ value: "XF", label: "XF" }, { value: "XC", label: "XC" }, { value: "GF", label: "GF" }] },
-  { group: "type", options: [{ value: "prime", label: "Prime · 定焦" }, { value: "zoom", label: "Zoom · 變焦" }] },
-];
+
+interface Props { featureDefinitions: Record<string, FeatureDefinition>; mobile?: boolean }
+
+const { featureDefinitions, mobile = false } = Astro.props;
+const mounts = [{ value: "", label: "全部" }, { value: "X", label: "X" }, { value: "G", label: "GFX" }];
+const series = ["XF", "XC", "GF"];
+const types = [{ value: "prime", label: "定焦" }, { value: "zoom", label: "變焦" }];
+const apertures = [{ value: "", label: "不限" }, ...APERTURE_OPTIONS.map((value) => ({ value: String(value), label: `≤F${value}` }))];
 ---
 
-<div class:list={["filter-panel", { "filter-panel-mobile": mobile }]} data-filter-panel>
-  {!mobile && <div class="filter-heading"><strong>FILTERS</strong><button type="button" class="text-button" data-reset>RESET</button></div>}
-  {groups.map(({ group, options }) => (
-    <fieldset class="filter-group">
-      <legend>{group.toUpperCase()}</legend>
-      <div class="filter-options">
-        {options.map(({ value, label }) => (
-          <label class="check-control" for={`${idPrefix}-${group}-${value}`}>
-            <input id={`${idPrefix}-${group}-${value}`} type="checkbox" value={value} data-filter={group} />
-            <span class="check-box" aria-hidden="true"></span><span>{label}</span>
-          </label>
-        ))}
-      </div>
-    </fieldset>
-  ))}
-  <fieldset class="filter-group">
-    <legend>FEATURES</legend>
-    <div class="filter-options feature-options">
-      {features.map(([code, definition]) => (
-        <label class="check-control" for={`${idPrefix}-feature-${code}`}>
-          <input id={`${idPrefix}-feature-${code}`} type="checkbox" value={code} data-filter="feature" />
-          <span class="check-box" aria-hidden="true"></span><span><b>{code}</b><small>{definition.nameZh}</small></span>
-        </label>
+<div class:list={["filter-panel", { "filter-panel-mobile": mobile }]}>
+  {!mobile && <div class="filter-heading"><h2>篩選</h2><button type="button" class="text-button" data-reset>全部清除</button></div>}
+
+  <div class="filter-group" role="group" aria-label="系統">
+    <h3>系統</h3>
+    <div class="segmented">
+      {mounts.map(({ value, label }) => <button type="button" data-filter="mount" data-value={value} aria-pressed={value === "" ? "true" : "false"}>{label}</button>)}
+    </div>
+  </div>
+
+  <div class="filter-group" role="group" aria-label="系列">
+    <h3>系列</h3>
+    <div class="chips">{series.map((value) => <button type="button" class="chip" data-filter="series" data-value={value} aria-pressed="false">{value}</button>)}</div>
+  </div>
+
+  <div class="filter-group" role="group" aria-label="類型">
+    <h3>類型</h3>
+    <div class="chips">{types.map(({ value, label }) => <button type="button" class="chip" data-filter="type" data-value={value} aria-pressed="false">{label}</button>)}</div>
+  </div>
+
+  <div class="filter-group" role="group" aria-label="焦段（35mm 等效）">
+    <h3>焦段 <small>35mm 等效</small></h3>
+    <div class="chips">
+      {FOCAL_PRESETS.map(({ id, label, hint }) => (
+        <button type="button" class="chip" data-filter="preset" data-value={id} aria-pressed="false">{label} <small>{hint}</small></button>
       ))}
     </div>
-  </fieldset>
-  <fieldset class="filter-group range-group">
-    <legend>FOCAL LENGTH</legend><output data-range-output="focal">8–400mm</output>
-    <div class="range-pair">
-      <label><span>MIN</span><input type="range" min="8" max="400" value="8" data-range="focal" data-bound="min" /></label>
-      <label><span>MAX</span><input type="range" min="8" max="400" value="400" data-range="focal" data-bound="max" /></label>
+    <div class="dual-range">
+      <span class="dual-range-track" aria-hidden="true"></span>
+      <span class="dual-range-fill" data-focal-fill aria-hidden="true"></span>
+      <input type="range" min="0" max={SLIDER_STEPS} value="0" data-focal="min" aria-label="最短等效焦距" />
+      <input type="range" min="0" max={SLIDER_STEPS} value={SLIDER_STEPS} data-focal="max" aria-label="最長等效焦距" />
     </div>
-  </fieldset>
-  <fieldset class="filter-group range-group">
-    <legend>WEIGHT</legend><output data-range-output="weight">78–2,265g</output>
-    <div class="range-pair">
-      <label><span>MIN</span><input type="range" min="78" max="2265" value="78" data-range="weight" data-bound="min" /></label>
-      <label><span>MAX</span><input type="range" min="78" max="2265" value="2265" data-range="weight" data-bound="max" /></label>
+    <output class="range-output num" data-focal-output>{SLIDER_RANGE.min}–{SLIDER_RANGE.max}mm</output>
+  </div>
+
+  <div class="filter-group" role="group" aria-label="最大光圈">
+    <h3>最大光圈</h3>
+    <div class="segmented">
+      {apertures.map(({ value, label }) => <button type="button" data-filter="aperture" data-value={value} aria-pressed={value === "" ? "true" : "false"}>{label}</button>)}
     </div>
-  </fieldset>
-  {mobile && <button type="button" class="secondary-button drawer-reset" data-reset>RESET FILTERS</button>}
+  </div>
+
+  <div class="filter-group">
+    <h3><label for={mobile ? "weight-mobile" : "weight-desktop"}>重量上限</label> <output class="num" data-weight-output>不限</output></h3>
+    <input class="single-range" id={mobile ? "weight-mobile" : "weight-desktop"} type="range" min={WEIGHT_LIMIT.min} max={WEIGHT_LIMIT.max} step={WEIGHT_LIMIT.step} value={WEIGHT_LIMIT.max} data-weight />
+  </div>
+
+  <div class="filter-group" role="group" aria-label="功能">
+    <h3>功能</h3>
+    <div class="chips">
+      {Object.entries(featureDefinitions).map(([code, definition]) => (
+        <button type="button" class="chip" data-filter="feature" data-value={code} aria-pressed="false" title={definition.name}>{code} <small>{definition.nameZh}</small></button>
+      ))}
+    </div>
+    <p class="filter-hint">需同時具備所選全部功能</p>
+  </div>
+
+  {mobile && <button type="button" class="secondary-button drawer-reset" data-reset>全部清除</button>}
 </div>

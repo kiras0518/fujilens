@@ -1,23 +1,45 @@
 ---
 import FeatureBadge from "./FeatureBadge.astro";
-import { formatAperture, formatFilter, formatFocalLength, formatMagnification } from "../lib/format";
+import FocalValue from "./FocalValue.astro";
+import { formatAperture, formatConstruction, formatFilter, formatMagnification, formatWeight } from "../lib/format";
 import type { FeatureDefinition, Lens } from "../types/lens";
+
 interface Props { lenses: Lens[]; featureDefinitions: Record<string, FeatureDefinition> }
+
 const { lenses, featureDefinitions } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const sortable = (label: string, key: string) => ({ label, key });
+const columns = [
+  sortable("焦距", "focal"), sortable("最大光圈", "aperture"), { label: "鏡片結構" }, { label: "葉片" },
+  sortable("放大倍率", "magnification"), { label: "濾鏡" }, sortable("重量", "weight"), { label: "功能" },
+];
 ---
 
 <div class="table-wrap" data-table-wrap hidden>
-  <table class="lens-table">
-    <thead><tr><th scope="col">Lens</th><th scope="col">Focal length</th><th scope="col">Aperture</th><th scope="col">Optics</th><th scope="col">Blades</th><th scope="col">Magnification</th><th scope="col">Filter</th><th scope="col">Weight</th><th scope="col">Features</th></tr></thead>
+  <table class="lens-table num">
+    <caption class="sr-only">鏡頭規格表，可點擊欄位標題排序</caption>
+    <thead>
+      <tr>
+        <th scope="col">鏡頭</th>
+        {columns.map((column) => (
+          <th scope="col" data-sort-column={"key" in column ? column.key : undefined}>
+            {"key" in column ? <button type="button" data-sort-header={column.key}>{column.label}<span aria-hidden="true" class="sort-indicator"></span></button> : column.label}
+          </th>
+        ))}
+      </tr>
+    </thead>
     <tbody data-table-body>
       {lenses.map((lens) => (
         <tr data-lens-id={lens.id}>
           <th scope="row"><a href={`${base}lenses/${lens.id}/`}>{lens.name}</a></th>
-          <td>{formatFocalLength(lens)}</td><td>{formatAperture(lens)}</td>
-          <td>{lens.opticalConstruction.groups}群{lens.opticalConstruction.elements}枚</td><td>{lens.apertureBlades}</td>
-          <td>{formatMagnification(lens.maxMagnification)}</td><td>{formatFilter(lens.filterSize)}</td><td>{lens.weight}g</td>
-          <td><div class="table-features">{lens.features.map((code) => <FeatureBadge code={code} definition={featureDefinitions[code]} compact />)}</div></td>
+          <td><FocalValue lens={lens} /></td>
+          <td>{formatAperture(lens)}</td>
+          <td>{formatConstruction(lens)}</td>
+          <td>{lens.apertureBlades}</td>
+          <td>{formatMagnification(lens.maxMagnification)}</td>
+          <td>{formatFilter(lens.filterSize)}</td>
+          <td>{formatWeight(lens.weight)}</td>
+          <td><div class="table-features">{lens.features.map((code) => <FeatureBadge code={code} definition={featureDefinitions[code]} />)}</div></td>
         </tr>
       ))}
     </tbody>

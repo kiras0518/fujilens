@@ -5,6 +5,7 @@ export type LensType = "prime" | "zoom";
 export interface FeatureDefinition {
   name: string;
   nameZh: string;
+  description: string;
 }
 
 export interface Lens {
